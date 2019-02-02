@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+	 android:layout_width = "match_parent"
+	 android:layout_height = "match_parent"
+	 xmlns:android = "http://schemas.android.com/apk/res/android"
+	 xmlns:app = "http://schemas.android.com/apk/res-auto"
+	 xmlns:tools = "http://schemas.android.com/tools">
+
+	 <include layout = "@layout/merge_guideline"/>
+
+	 <android.support.v7.widget.AppCompatTextView
+
+		  android:id = "@+id/txt_cels"
+		  android:layout_width = "wrap_content"
+		  android:layout_height = "wrap_content"
+
+		  style = "@style/AppTheme.text.title"
+		  android:layout_marginTop = "@dimen/weather_top_space"
+		  android:textSize = "@dimen/text_size_extra_great"
+		  app:layout_constraintEnd_toEndOf = "@+id/guidelineEnd"
+		  app:layout_constraintStart_toStartOf = "@+id/guidelineStart"
+		  app:layout_constraintTop_toTopOf = "parent"
+		  tools:text = "34"
+	 />
+	 <android.support.v7.widget.AppCompatTextView
+		  android:id = "@+id/txt_subtitle"
+		  android:layout_width = "wrap_content"
+		  android:layout_height = "wrap_content"
+
+		  style = "@style/AppTheme.text.subtitle"
+		  android:layout_marginTop = "@dimen/padding_normal"
+		  app:layout_constraintEnd_toEndOf = "@+id/guidelineEnd"
+		  app:layout_constraintStart_toStartOf = "@+id/guidelineStart"
+		  app:layout_constraintTop_toBottomOf = "@+id/txt_cels"
+		  tools:text = "Bangalroe"
+	 />
+	 <android.support.v7.widget.RecyclerView
+		  android:id = "@+id/recycler"
+		  android:layout_width = "match_parent"
+		  android:layout_height = "0dp"
+		  class = "android.support.v7.app.AlertController$RecycleListView"
+		  android:layout_marginTop = "@dimen/weather_bottom_space"
+		  app:layout_constraintBottom_toBottomOf = "parent"
+		  app:layout_constraintEnd_toEndOf = "parent"
+		  app:layout_constraintStart_toStartOf = "parent"
+		  app:layout_constraintTop_toBottomOf = "@+id/txt_subtitle"/>
+
+
+</android.support.constraint.ConstraintLayout>

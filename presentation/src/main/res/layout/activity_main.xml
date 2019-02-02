@@ -6,7 +6,7 @@
 						type = "java.lang.String"/>
 	 </data>
 
-	 <android.support.constraint.ConstraintLayout
+	 <FrameLayout
 		  android:layout_width = "match_parent"
 		  android:layout_height = "match_parent"
 		  xmlns:android = "http://schemas.android.com/apk/res/android"
@@ -14,6 +14,15 @@
 		  xmlns:tools = "http://schemas.android.com/tools"
 		  tools:context = ".ui.screens.MainActivity">
 
-	 </android.support.constraint.ConstraintLayout>
+		  <include layout = "@layout/layer_error"
+					  android:visibility = "gone"
+		  />
+
+		  <include layout = "@layout/layer_wether"
+					  android:visibility = "gone"
+		  />
+
+
+	 </FrameLayout>
 
 </layout>
