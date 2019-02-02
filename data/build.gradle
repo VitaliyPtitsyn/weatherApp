@@ -40,6 +40,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':domain')
 
 
     api deps.kotlin.stdlib
@@ -62,6 +63,10 @@ dependencies {
 
     api 'com.squareup.okhttp3:okhttp:3.11.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+
+    // Lifecycle components
+    api deps.jetpack.lifecycle
+    kapt deps.jetpack.lifecycleCompiler
 
     //test
     testImplementation deps.test.junit

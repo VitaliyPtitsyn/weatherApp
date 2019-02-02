@@ -37,9 +37,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation('com.crashlytics.sdk.android:crashlytics:2.9.7@aar') {
-        transitive = true;
-    }
 
     api deps.jetpack.reactivestream
 
@@ -49,18 +46,15 @@ dependencies {
     api deps.rx.kotlin
 
 
-
     implementation deps.dagger.runtime
     implementation deps.dagger.android
     implementation deps.dagger.android_support
-
 
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler
 
     implementation deps.support.annotations
 
-    //test
     //test
     testImplementation deps.test.junit
     testImplementation deps.test.mockitoCore
