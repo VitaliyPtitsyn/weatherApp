@@ -1,0 +1,86 @@
+apply {
+    plugin 'com.android.library'
+    plugin 'kotlin-android'
+    plugin 'kotlin-android-extensions'
+    plugin 'org.jetbrains.kotlin.android.extensions'
+    plugin 'kotlin-kapt'
+    plugin 'kotlin-allopen'
+    plugin 'jacoco'
+
+}
+
+android {
+    compileSdkVersion build_versions.compileSdkVersion
+
+
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        buildToolsVersion build_versions.build_tools
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dexOptions { preDexLibraries false }
+    dataBinding { enabled = true }
+    testOptions { unitTests.returnDefaultValues = true }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':domain')
+
+    api deps.kotlin.stdlib
+    api deps.rx.java
+    api deps.rx.android
+    api deps.rx.kotlin
+
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android
+    implementation deps.dagger.android_support
+    kapt deps.dagger.android_support_compiler
+    kapt deps.dagger.compiler
+
+    implementation deps.jetpack.lifecycle
+    implementation deps.jetpack.viewmodel
+    implementation deps.jetpack.livedata
+    implementation deps.jetpack.lifecycleruntime
+    implementation deps.jetpack.reactivestream
+
+    implementation deps.support.annotations
+    implementation deps.support.app_compat
+    implementation deps.support.recyclerview
+    implementation deps.support.cardview
+    implementation deps.support.customtabs
+
+    implementation deps.support.design
+    implementation deps.support.core_utils
+    implementation deps.support.v4
+
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+
+
+
+    //test
+    testImplementation deps.test.junit
+    testImplementation deps.test.mockitoCore
+    testImplementation deps.test.mockitoAndroid
+
+    androidTestImplementation deps.androidTest.runner
+    androidTestImplementation deps.androidTest.rules
+    androidTestImplementation deps.androidTest.support
+}

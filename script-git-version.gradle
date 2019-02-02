@@ -1,0 +1,30 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.ajoberstar:grgit:1.7.2'
+    }
+}
+
+import org.ajoberstar.grgit.Grgit
+
+ext {
+    def versionMajor = 1
+    def versionMinor = 0
+    def versionPatch = 0
+
+    git = Grgit.open(currentDir: projectDir)
+    storeName = "${versionMajor}.${versionMinor}.${versionPatch}".toString() //default version
+    gitbranchName = "${git.branch.current.name}".toString() // current branch
+    gitComitsCount = git.log().size() //commits count
+    gitLatestComitTime = git.head().time //lates commit time
+
+}
+
+task printVersion() {
+    println("Store Name: $storeName")
+    println("Branch name: $gitbranchName")
+    println("Version Code: $gitComitsCount")
+    println("Version Code Time: $gitLatestComitTime")
+}
