@@ -10,6 +10,7 @@ import com.ptitsn.presentation.mvvm.model.Loaded
 import com.ptitsn.presentation.mvvm.model.Progress
 import com.ptitsn.presentation.tools.RxSchedulerRule
 import com.ptitsn.presentation.tools.testObserver
+import com.ptitsn.presentation.ui.mapper.UiModelMapper
 import io.reactivex.Single
 import org.junit.Rule
 import org.junit.Test
@@ -39,6 +40,8 @@ class WeatherVMTest {
     lateinit var weatherUseCase: WeatherUseCase
     @Mock
     lateinit var errorMapper: UIErrorMapper
+    @Mock
+    lateinit var modelMapper: UiModelMapper
 
 
     @Test
@@ -69,7 +72,7 @@ class WeatherVMTest {
         classUnderTest.updateWeather()
 
         Truth.assert_().that(lvProgress.observedValues).isEqualTo(
-                listOf(Progress, Loaded)
+                listOf(Progress(), Loaded())
         )
         Truth.assert_().that(currentWeather.observedValues).isNotEmpty()
         Truth.assert_().that(lvWeatherForecast.observedValues).isNotEmpty()
@@ -89,7 +92,7 @@ class WeatherVMTest {
         classUnderTest.updateWeather()
 
         Truth.assert_().that(lvProgress.observedValues).isEqualTo(
-                listOf(Progress, ErrorState(RuntimeException(), retry = {}))
+                listOf(Progress(), ErrorState(RuntimeException(), retry = {}))
         )
         Truth.assert_().that(currentWeather.observedValues).isEmpty()
         Truth.assert_().that(lvWeatherForecast.observedValues).isEmpty()

@@ -3,9 +3,34 @@ package com.ptitsn.presentation.mvvm.model
 enum class ScreenStateEnum { PROGRESS, LOADED, ERROR_STATE }
 
 
-sealed class ScreenState(val state: ScreenStateEnum)
-class Progress : ScreenState(ScreenStateEnum.PROGRESS)
-class Loaded : ScreenState(ScreenStateEnum.LOADED)
+sealed class ScreenState(val state: ScreenStateEnum) {
+    override fun equals(other: Any?): Boolean {
+        if (other is ScreenState)
+            return true
+        return super.equals(other)
+    }
+
+    override fun hashCode(): Int {
+        return state.hashCode()
+    }
+}
+
+class Progress : ScreenState(ScreenStateEnum.PROGRESS) {
+    override fun equals(other: Any?): Boolean {
+        if (other is Progress)
+            return true
+        return super.equals(other)
+    }
+}
+
+class Loaded : ScreenState(ScreenStateEnum.LOADED) {
+    override fun equals(other: Any?): Boolean {
+        if (other is Progress)
+            return true
+        return super.equals(other)
+    }
+}
+
 data class ErrorState(val throwable: Throwable,
                       val meesage: CharSequence? = null,
                       val retry: () -> Unit) : ScreenState(ScreenStateEnum.ERROR_STATE) {

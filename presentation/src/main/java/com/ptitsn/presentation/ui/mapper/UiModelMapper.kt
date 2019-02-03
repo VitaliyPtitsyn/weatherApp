@@ -8,7 +8,7 @@ import java.util.*
 import javax.inject.Inject
 
 
-class UiModelMapper @Inject constructor(val resoruces: Resources) {
+open class UiModelMapper @Inject constructor(val resoruces: Resources) {
 
 
     fun mapWeather(it: Weather): WeatherUi =
