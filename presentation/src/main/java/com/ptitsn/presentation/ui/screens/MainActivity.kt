@@ -2,11 +2,15 @@ package com.ptitsn.presentation.ui.screens
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.util.Log
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RectShape
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import com.ptitsn.presentation.R
 import com.ptitsn.presentation.databinding.ActivityMainBinding
 import com.ptitsn.presentation.mvvm.WeatherVM
 import com.ptitsn.presentation.ui.screens.base.BaseMvvmActivity
+import kotlinx.android.synthetic.main.layer_wether.*
 
 class MainActivity : BaseMvvmActivity<ActivityMainBinding>(R.layout.activity_main) {
 
@@ -19,8 +23,28 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding>(R.layout.activity_mai
         binding.vm = weatherViewModel
         weatherViewModel.requestLocationPermission(this)
 
-        weatherViewModel.lvScreenState.observe(this, Observer {
-            Log.d("!!!!", "$it")
+        subscribeForWhether()
+
+    }
+
+    private fun subscribeForWhether() {
+        val adapter = WeatherAdpater()
+
+        recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recycler.adapter = adapter
+
+
+        val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        val dividerThickness = resources.getDimensionPixelOffset(R.dimen.divider)
+        val shapeDrawableForDivider = ShapeDrawable(RectShape())
+        shapeDrawableForDivider.intrinsicHeight = dividerThickness
+        shapeDrawableForDivider.paint.color = resources.getColor(R.color.divider)
+
+        dividerItemDecoration.setDrawable(shapeDrawableForDivider)
+        recycler.addItemDecoration(dividerItemDecoration)
+
+        weatherViewModel.lvWeatherForecast.observe(this, Observer { list ->
+            adapter.subpmitUpdate(list)
         })
     }
 

@@ -13,5 +13,6 @@
 	 <color name = "text_color_subtitle">#556799</color>
 
 	 <color name = "bg_grey">#4a4a4a</color>
+	 <color name = "divider">#1F000000</color>
 
 </resources>

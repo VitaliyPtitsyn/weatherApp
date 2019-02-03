@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app = "http://schemas.android.com/apk/res-auto"
+		  xmlns:tools = "http://schemas.android.com/tools">
 
+	 <data>
+
+		  <variable name = "weather"
+						type = "com.ptitsn.presentation.mvvm.model.WeatherUi"/>
+	 </data>
 	 <android.support.constraint.ConstraintLayout
 		  android:layout_width = "match_parent"
-		  android:layout_height = "match_parent"
+		  android:layout_height = "@dimen/weather_forecust_height"
 		  xmlns:android = "http://schemas.android.com/apk/res/android">
+
+		  <android.support.v7.widget.AppCompatTextView
+				android:id = "@+id/txt_week_day"
+				android:layout_width = "0dp"
+				android:layout_height = "wrap_content"
+				style = "@style/AppTheme.text.normal"
+				android:layout_marginEnd = "8dp"
+				android:layout_marginRight = "8dp"
+				android:text = "@{weather.weekDay}"
+				app:layout_constraintBottom_toBottomOf = "parent"
+				app:layout_constraintEnd_toStartOf = "@+id/txt_week_celsius"
+				app:layout_constraintStart_toStartOf = "parent"
+				app:layout_constraintTop_toTopOf = "parent" tools:text = "Tuesday"/>
+		  <android.support.v7.widget.AppCompatTextView
+				android:id = "@+id/txt_week_celsius"
+				android:layout_width = "wrap_content"
+				android:layout_height = "wrap_content"
+				style = "@style/AppTheme.text.normal"
+				android:text = "@{weather.celsius}"
+				app:layout_constraintBottom_toBottomOf = "parent"
+				app:layout_constraintEnd_toEndOf = "parent"
+				app:layout_constraintTop_toTopOf = "parent"
+				tools:text = "34 C"
+		  />
 	 </android.support.constraint.ConstraintLayout>
 </layout>

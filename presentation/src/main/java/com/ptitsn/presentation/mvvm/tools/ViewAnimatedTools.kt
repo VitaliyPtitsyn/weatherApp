@@ -71,7 +71,6 @@ fun generateAnimtaion(view: View, show: Boolean, animatedMask: Int): ObjectAnima
                     ANIMATION_SLID_UP -> animatinList.add(
                             if (show) PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, (view.parent as View).height.toFloat(), 0f)
                             else PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0f, (view.parent as View).height.toFloat()))
-
                 }
             }
     return ObjectAnimator.ofPropertyValuesHolder(view, *animatinList.toTypedArray())
