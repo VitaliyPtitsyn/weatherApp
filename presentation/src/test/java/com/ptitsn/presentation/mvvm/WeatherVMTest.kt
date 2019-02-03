@@ -2,17 +2,20 @@ package com.ptitsn.presentation.mvvm
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth
-import com.ptitsn.domain.model.Wheather
+import com.ptitsn.domain.model.Weather
+import com.ptitsn.domain.ui.UIErrorMapper
 import com.ptitsn.domain.usecase.WeatherUseCase
+import com.ptitsn.presentation.mvvm.model.ErrorState
+import com.ptitsn.presentation.mvvm.model.Loaded
+import com.ptitsn.presentation.mvvm.model.Progress
+import com.ptitsn.presentation.tools.RxSchedulerRule
 import com.ptitsn.presentation.tools.testObserver
-import duponchel.nicolas.rxbasics.RxSchedulerRule
 import io.reactivex.Single
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import java.sql.Date
@@ -34,18 +37,15 @@ class WeatherVMTest {
 
     @Mock
     lateinit var weatherUseCase: WeatherUseCase
+    @Mock
+    lateinit var errorMapper: UIErrorMapper
 
-    @Before
-    fun setUpDate() {
-        `when`(weatherUseCase.provideCurrentLocation())
-                .thenReturn(Single.just(Wheather("city", 34F, Date(5465443))))
-    }
 
     @Test
     fun `init weatherUseCase`() {
         val weatherForecast = classUnderTest.lvWeatherForecast.testObserver()
         val currentWeather = classUnderTest.lvCurrentWeather.testObserver()
-        val lvProgress = classUnderTest.lvProgress.testObserver()
+        val lvProgress = classUnderTest.lvScreenState.testObserver()
         Truth.assert_().that(weatherForecast.observedValues).isEmpty()
         Truth.assert_().that(lvProgress.observedValues).isEmpty()
         Truth.assert_().that(currentWeather.observedValues).isEmpty()
@@ -53,15 +53,47 @@ class WeatherVMTest {
 
     @Test
     fun `check Weather`() {
-        val currentWeather = classUnderTest.lvCurrentWeather.testObserver()
-        val lvProgress = classUnderTest.lvProgress.testObserver()
+        Mockito.`when`(weatherUseCase.provideCurrentLocation())
+                .thenReturn(Single.just(Weather("city", 34F, Date(5465443))))
+        Mockito.`when`(weatherUseCase.provideWeatherForecastLocation())
+                .thenReturn(Single.just(listOf(
+                        Weather("city", 34F, Date(5465443)),
+                        Weather("city", 34F, Date(5465443)),
+                        Weather("city", 34F, Date(5465443))
+                )))
 
-        classUnderTest.locationPermissionGrunted()
+        val currentWeather = classUnderTest.lvCurrentWeather.testObserver()
+        val lvWeatherForecast = classUnderTest.lvWeatherForecast.testObserver()
+        val lvProgress = classUnderTest.lvScreenState.testObserver()
+
+        classUnderTest.updateWeather()
 
         Truth.assert_().that(lvProgress.observedValues).isEqualTo(
-                listOf(true, false)
+                listOf(Progress, Loaded)
         )
         Truth.assert_().that(currentWeather.observedValues).isNotEmpty()
+        Truth.assert_().that(lvWeatherForecast.observedValues).isNotEmpty()
+        Mockito.verify(weatherUseCase).provideCurrentLocation()
+
     }
 
+    @Test
+    fun `check error`() {
+        Mockito.`when`(weatherUseCase.provideCurrentLocation())
+                .thenReturn(Single.error(RuntimeException()))
+
+        val currentWeather = classUnderTest.lvCurrentWeather.testObserver()
+        val lvWeatherForecast = classUnderTest.lvWeatherForecast.testObserver()
+        val lvProgress = classUnderTest.lvScreenState.testObserver()
+
+        classUnderTest.updateWeather()
+
+        Truth.assert_().that(lvProgress.observedValues).isEqualTo(
+                listOf(Progress, ErrorState(RuntimeException(), retry = {}))
+        )
+        Truth.assert_().that(currentWeather.observedValues).isEmpty()
+        Truth.assert_().that(lvWeatherForecast.observedValues).isEmpty()
+        Mockito.verify(weatherUseCase).provideCurrentLocation()
+    }
 }
+

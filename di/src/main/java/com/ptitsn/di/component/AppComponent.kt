@@ -6,6 +6,7 @@ import com.ptitsn.di.PerApp
 import com.ptitsn.di.WhetherApp
 import com.ptitsn.di.module.AppModule
 import com.ptitsn.di.module.ScreensModule
+import com.ptitsn.di.module.UiMappersModule
 import com.ptitsn.di.module.UseCaseModule
 import com.ptitsn.di.module.vm.ViewModelModule
 import com.ptitsn.domain.callback.IApplicationListener
@@ -22,8 +23,8 @@ import dagger.android.support.AndroidSupportInjectionModule
     AppModule::class,
     ScreensModule::class,
     ViewModelModule::class,
+    UiMappersModule::class,
     UseCaseModule::class
-
 ])
 interface AppComponent : AndroidInjector<WhetherApp> {
 

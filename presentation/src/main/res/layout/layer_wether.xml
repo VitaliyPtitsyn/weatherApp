@@ -1,49 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-	 android:layout_width = "match_parent"
-	 android:layout_height = "match_parent"
+<layout
 	 xmlns:android = "http://schemas.android.com/apk/res/android"
 	 xmlns:app = "http://schemas.android.com/apk/res-auto"
 	 xmlns:tools = "http://schemas.android.com/tools">
 
-	 <include layout = "@layout/merge_guideline"/>
+	 <data>
+		  <import type = "com.ptitsn.presentation.mvvm.model.ScreenStateEnum"/>
 
-	 <android.support.v7.widget.AppCompatTextView
-
-		  android:id = "@+id/txt_cels"
-		  android:layout_width = "wrap_content"
-		  android:layout_height = "wrap_content"
-
-		  style = "@style/AppTheme.text.title"
-		  android:layout_marginTop = "@dimen/weather_top_space"
-		  android:text = "34"
-		  android:textSize = "@dimen/text_size_extra_great"
-		  app:layout_constraintEnd_toEndOf = "@+id/guidelineEnd"
-		  app:layout_constraintStart_toStartOf = "@+id/guidelineStart"
-		  app:layout_constraintTop_toTopOf = "parent"
-	 />
-	 <android.support.v7.widget.AppCompatTextView
-		  android:id = "@+id/txt_subtitle"
-		  android:layout_width = "wrap_content"
-		  android:layout_height = "wrap_content"
-
-		  style = "@style/AppTheme.text.subtitle"
-		  android:layout_marginTop = "@dimen/padding_normal"
-		  android:text = "Bangalroe"
-		  app:layout_constraintEnd_toEndOf = "@+id/guidelineEnd"
-		  app:layout_constraintStart_toStartOf = "@+id/guidelineStart"
-		  app:layout_constraintTop_toBottomOf = "@+id/txt_cels"
-	 />
-	 <android.support.v7.widget.RecyclerView
-		  android:id = "@+id/recycler"
+		  <variable name = "vm"
+						type = "com.ptitsn.presentation.mvvm.WeatherVM"/>
+	 </data>
+	 <android.support.constraint.ConstraintLayout
 		  android:layout_width = "match_parent"
-		  android:layout_height = "0dp"
-		  android:layout_marginTop = "@dimen/weather_bottom_space"
-		  android:elevation = "4dp"
-		  app:layout_constraintBottom_toBottomOf = "parent"
-		  app:layout_constraintEnd_toEndOf = "parent"
-		  app:layout_constraintStart_toStartOf = "parent"
-		  app:layout_constraintTop_toBottomOf = "@+id/txt_subtitle"/>
+		  android:layout_height = "match_parent"
+		  app:cv_animated = "@{true}"
+		  app:cv_animated_mask = "@{1}"
+		  app:cv_visible = "@{vm.lvScreenState.state == ScreenStateEnum.LOADED}"
+	 >
+
+		  <include layout = "@layout/merge_guideline"/>
+
+		  <android.support.v7.widget.AppCompatTextView
+
+				android:id = "@+id/txt_cels"
+				android:layout_width = "wrap_content"
+				android:layout_height = "wrap_content"
+
+				style = "@style/AppTheme.text.title"
+				android:layout_marginTop = "@dimen/weather_top_space"
+				android:text = "@{vm.lvCurrentWeather.celsius}"
+				android:textSize = "@dimen/text_size_extra_great"
+				app:layout_constraintEnd_toEndOf = "@+id/guidelineEnd"
+				app:layout_constraintStart_toStartOf = "@+id/guidelineStart"
+				app:layout_constraintTop_toTopOf = "parent"
+		  />
+		  <android.support.v7.widget.AppCompatTextView
+				android:id = "@+id/txt_subtitle"
+				android:layout_width = "wrap_content"
+				android:layout_height = "wrap_content"
+
+				style = "@style/AppTheme.text.subtitle"
+				android:layout_marginTop = "@dimen/padding_normal"
+				android:text = "@{vm.lvCurrentWeather.city}"
+				app:layout_constraintEnd_toEndOf = "@+id/guidelineEnd"
+				app:layout_constraintStart_toStartOf = "@+id/guidelineStart"
+				app:layout_constraintTop_toBottomOf = "@+id/txt_cels"
+		  />
+
+		  <!--background  shadow_top used fo shadow, base on api lvl-->
+		  <android.support.v7.widget.RecyclerView
+				android:id = "@+id/recycler"
+				android:layout_width = "match_parent"
+				android:layout_height = "0dp"
+				android:layout_marginTop = "@dimen/weather_bottom_space"
+				android:background = "@drawable/shadow_top"
+				android:padding = "@dimen/padding_normal"
+				app:layout_constraintBottom_toBottomOf = "parent"
+				app:layout_constraintEnd_toEndOf = "parent"
+				app:layout_constraintStart_toStartOf = "parent"
+				app:layout_constraintTop_toBottomOf = "@+id/txt_subtitle"/>
 
 
-</android.support.constraint.ConstraintLayout>
+	 </android.support.constraint.ConstraintLayout>
+
+</layout>

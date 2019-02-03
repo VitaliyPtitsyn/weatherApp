@@ -7,8 +7,10 @@
 >
 
 	 <data>
-		  <variable name = "name"
-						type = "java.lang.String"/>
+		  <import type = "com.ptitsn.presentation.mvvm.model.ScreenStateEnum"/>
+
+		  <variable name = "vm"
+						type = "com.ptitsn.presentation.mvvm.WeatherVM"/>
 	 </data>
 
 	 <FrameLayout
@@ -16,10 +18,38 @@
 		  android:layout_height = "match_parent"
 	 >
 
-		  <include layout = "@layout/layer_error"
-					  android:visibility = "gone"/>
+		  <FrameLayout
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				android:visibility = "gone"
+				app:cv_animated = "@{false}"
+				app:cv_animated_mask = "@{0}"
+				app:cv_visible = "@{vm.lvScreenState.state == ScreenStateEnum.PROGRESS}"
+		  >
+				<ProgressBar
+					 android:layout_width = "wrap_content"
+					 android:layout_height = "wrap_content"
+					 android:layout_gravity = "center"/>
+		  </FrameLayout>
 
-		  <include layout = "@layout/layer_wether"/>
+		  <include
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				layout = "@layout/layer_error"
+				android:visibility = "gone"
+				app:vm = "@{vm}"
+		  />
+
+		  <include
+				android:layout_width = "match_parent"
+				android:layout_height = "match_parent"
+				layout = "@layout/layer_wether"
+
+				android:visibility = "gone"
+				app:vm = "@{vm}"
+
+		  />
+
 	 </FrameLayout>
 
 </layout>

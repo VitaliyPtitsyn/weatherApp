@@ -1,6 +1,8 @@
 package com.ptitsn.presentation.ui.screens
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.util.Log
 import com.ptitsn.presentation.R
 import com.ptitsn.presentation.databinding.ActivityMainBinding
 import com.ptitsn.presentation.mvvm.WeatherVM
@@ -14,7 +16,12 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding>(R.layout.activity_mai
         weatherViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(WeatherVM::class.java)
 
-        weatherViewModel.requestLocationPermision(this)
+        binding.vm = weatherViewModel
+        weatherViewModel.requestLocationPermission(this)
+
+        weatherViewModel.lvScreenState.observe(this, Observer {
+            Log.d("!!!!", "$it")
+        })
     }
 
 
