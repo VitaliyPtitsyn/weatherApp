@@ -48,6 +48,7 @@
 		  />
 
 		  <!--background  shadow_top used fo shadow, base on api lvl-->
+		  <!--TODO cv_animated_mask to constants atributes-->
 		  <android.support.v7.widget.RecyclerView
 				android:id = "@+id/recycler"
 				android:layout_width = "match_parent"
@@ -55,6 +56,11 @@
 				android:layout_marginTop = "@dimen/weather_bottom_space"
 				android:background = "@drawable/shadow_top"
 				android:padding = "@dimen/padding_normal"
+				android:visibility = "gone"
+				app:cv_animated = "@{true}"
+				app:cv_animated_mask = "@{2|3}"
+				app:cv_visible = "@{vm.lvWeatherForecastVisibility}"
+
 				app:layout_constraintBottom_toBottomOf = "parent"
 				app:layout_constraintEnd_toEndOf = "parent"
 				app:layout_constraintStart_toStartOf = "parent"

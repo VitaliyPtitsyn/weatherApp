@@ -27,7 +27,10 @@ open class WeatherVM @Inject constructor(
 
     val lvScreenState = MutableLiveData<ScreenState>()
     val lvCurrentWeather = MutableLiveData<WeatherUi>()
+
     val lvWeatherForecast = MutableLiveData<List<WeatherUi>>()
+    val lvWeatherForecastVisibility = Transformations.map(lvWeatherForecast)
+    { list -> !list.isEmpty() }
 
     val lvErrorText = Transformations.map(lvScreenState) { sc ->
         if (sc is ErrorState) {
@@ -67,6 +70,7 @@ open class WeatherVM @Inject constructor(
     fun getWeatherForecast() {
         weatherUseCase.provideWeatherForecastLocation()
                 .map { it.map { wether -> modelUiMapper.mapWeather(wether) } }
+                .delay(4, TimeUnit.SECONDS)
                 .subscribe({ value ->
                     lvWeatherForecast.postValue(value)
                 }, { t: Throwable -> postErrorState(t, this::getWeatherForecast) })

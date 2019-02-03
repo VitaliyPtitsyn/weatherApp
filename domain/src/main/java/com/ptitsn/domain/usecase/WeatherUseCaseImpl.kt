@@ -10,7 +10,6 @@ class WeatherUseCaseImpl @Inject constructor() : WeatherUseCase {
 
     override fun provideCurrentLocation(): Single<Weather> =
             Single.just(Weather("city", 34f, Date(5465443)))
-//            Single.error(LocationPermisionDenied())
 
     override fun provideWeatherForecastLocation(): Single<List<Weather>> = Single.just(
             listOf(

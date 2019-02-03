@@ -64,13 +64,13 @@ fun generateAnimtaion(view: View, show: Boolean, animatedMask: Int): ObjectAnima
     ANIMATION_CONST.animations
             .filter { mask -> (mask and animatedMask) > 0; }
             .forEach { mask ->
-                when (animatedMask) {
+                when (mask) {
                     ANIMATION_ALPHA -> animatinList.add(
                             if (show) PropertyValuesHolder.ofFloat(View.ALPHA, 0.3f, 1f)
                             else PropertyValuesHolder.ofFloat(View.ALPHA, 1f, 0f))
                     ANIMATION_SLID_UP -> animatinList.add(
-                            if (show) PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, view.height.toFloat(), 0f)
-                            else PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0f, view.height.toFloat()))
+                            if (show) PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, (view.parent as View).height.toFloat(), 0f)
+                            else PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0f, (view.parent as View).height.toFloat()))
 
                 }
             }
