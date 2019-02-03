@@ -31,7 +31,9 @@ android {
 
     dexOptions { preDexLibraries false }
     dataBinding { enabled = true }
-    testOptions { unitTests.returnDefaultValues = true }
+    testOptions {
+        unitTests.includeAndroidResources = true
+        unitTests.returnDefaultValues = true }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -73,13 +75,16 @@ dependencies {
     implementation deps.support.core_utils
     implementation deps.support.v4
 
-    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+    implementation deps.other.rxpermissions
+
 
 
     //test
     testImplementation deps.test.junit
+    testImplementation deps.test.truth
+    testImplementation deps.test.archCore
     testImplementation deps.test.mockitoCore
-    testImplementation deps.test.mockitoAndroid
+    androidTestImplementation deps.test.mockitoAndroid
 
     androidTestImplementation deps.androidTest.runner
     androidTestImplementation deps.androidTest.rules

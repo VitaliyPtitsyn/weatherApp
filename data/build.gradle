@@ -73,7 +73,6 @@ dependencies {
     testImplementation deps.test.mockitoCore
     testImplementation deps.test.mockitoAndroid
 
-    androidTestImplementation deps.androidTest.archCore
     androidTestImplementation deps.androidTest.runner
     androidTestImplementation deps.androidTest.rules
     androidTestImplementation deps.androidTest.support

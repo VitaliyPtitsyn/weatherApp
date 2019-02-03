@@ -2,7 +2,7 @@ package com.ptitsn.di.module.vm
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.ptitsn.presentation.mvvm.MainVM
+import com.ptitsn.presentation.mvvm.WeatherVM
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -13,8 +13,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MainVM::class)
-    internal abstract fun splashViewModel(viewModel: MainVM): ViewModel
+    @ViewModelKey(WeatherVM::class)
+    internal abstract fun splashViewModel(viewModel: WeatherVM): ViewModel
 //
 
     @Binds

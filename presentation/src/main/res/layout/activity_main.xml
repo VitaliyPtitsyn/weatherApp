@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+	 xmlns:android = "http://schemas.android.com/apk/res/android"
+	 xmlns:app = "http://schemas.android.com/apk/res-auto"
+	 xmlns:tools = "http://schemas.android.com/tools"
+	 tools:context = ".ui.screens.MainActivity"
+>
 
 	 <data>
 		  <variable name = "name"
@@ -9,20 +14,12 @@
 	 <FrameLayout
 		  android:layout_width = "match_parent"
 		  android:layout_height = "match_parent"
-		  xmlns:android = "http://schemas.android.com/apk/res/android"
-		  xmlns:app = "http://schemas.android.com/apk/res-auto"
-		  xmlns:tools = "http://schemas.android.com/tools"
-		  tools:context = ".ui.screens.MainActivity">
+	 >
 
 		  <include layout = "@layout/layer_error"
-					  android:visibility = "gone"
-		  />
+					  android:visibility = "gone"/>
 
-		  <include layout = "@layout/layer_wether"
-					  android:visibility = "gone"
-		  />
-
-
+		  <include layout = "@layout/layer_wether"/>
 	 </FrameLayout>
 
 </layout>
