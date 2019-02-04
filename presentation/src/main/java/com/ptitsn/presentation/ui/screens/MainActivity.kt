@@ -4,6 +4,8 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
+import android.os.Bundle
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import com.ptitsn.presentation.R
@@ -15,6 +17,10 @@ import kotlinx.android.synthetic.main.layer_wether.*
 class MainActivity : BaseMvvmActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private lateinit var weatherViewModel: WeatherVM
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        ViewCompat.setElevation(recycler, 10f);
+    }
 
     override fun attachViewModels(binding: ActivityMainBinding) {
         weatherViewModel = ViewModelProviders.of(this, viewModelFactory)

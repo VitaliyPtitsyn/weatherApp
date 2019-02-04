@@ -1,4 +1,4 @@
 <resources>
-	 <string name = "app_name">presentation</string>
+	 <string name = "app_name">Ptitsyn Weather</string>
 	 <string name = "retry">retry</string>
 </resources>

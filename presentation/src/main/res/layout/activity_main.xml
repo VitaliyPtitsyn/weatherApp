@@ -29,6 +29,8 @@
 				<ProgressBar
 					 android:layout_width = "wrap_content"
 					 android:layout_height = "wrap_content"
+					 android:minHeight="@dimen/progress_bar"
+					 android:minWidth="@dimen/progress_bar"
 					 android:indeterminateDrawable="@drawable/progressbar_spinner_rotate"
 
 					 android:layout_gravity = "center"/>
