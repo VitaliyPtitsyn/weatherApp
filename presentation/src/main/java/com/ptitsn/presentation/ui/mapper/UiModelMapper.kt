@@ -21,7 +21,7 @@ open class UiModelMapper @Inject constructor(val resoruces: Resources) {
         return sdf.format(date)
     }
 
-    fun formateTocelsi(ce: Float): CharSequence {
+    fun formateTocelsi(ce: Double): CharSequence {
         return "$ce"
     }
 

@@ -73,8 +73,10 @@ dependencies {
     testImplementation deps.test.mockitoCore
     testImplementation deps.test.mockitoAndroid
 
+    androidTestImplementation deps.test.archCore
     androidTestImplementation deps.androidTest.runner
     androidTestImplementation deps.androidTest.rules
     androidTestImplementation deps.androidTest.support
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
 
 }

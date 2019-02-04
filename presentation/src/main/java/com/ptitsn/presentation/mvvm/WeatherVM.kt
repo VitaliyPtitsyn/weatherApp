@@ -9,8 +9,8 @@ import com.ptitsn.domain.usecase.WeatherUseCase
 import com.ptitsn.presentation.mvvm.model.*
 import com.ptitsn.presentation.ui.mapper.UiModelMapper
 import com.tbruyelle.rxpermissions2.RxPermissions
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 open class WeatherVM @Inject constructor(
@@ -59,7 +59,7 @@ open class WeatherVM @Inject constructor(
                 .map { wether -> modelUiMapper.mapWeather(wether) }
                 .doOnSubscribe { lvScreenState.postValue(Progress()) }
                 .doAfterSuccess { if (autoRequestForecust) getWeatherForecast() }
-                .delay(2, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ value ->
                     lvScreenState.postValue(Loaded())
                     lvCurrentWeather.postValue(value)
@@ -70,7 +70,7 @@ open class WeatherVM @Inject constructor(
     fun getWeatherForecast() {
         weatherUseCase.provideWeatherForecastLocation()
                 .map { it.map { wether -> modelUiMapper.mapWeather(wether) } }
-                .delay(4, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ value ->
                     lvWeatherForecast.postValue(value)
                 }, { t: Throwable -> postErrorState(t, this::getWeatherForecast) })

@@ -108,7 +108,7 @@ test.truth = 'com.google.truth:truth:0.42'
 def androidTest = [:]
 
 androidTest.runner = 'com.android.support.test:runner:1.0.'
-androidTest.rules = 'com.android.support.test:rules:1.0.1'
+androidTest.rules = 'com.android.support.test:rules:1.0.2'
 androidTest.support = "com.android.support:support-annotations:$support_version"
 
 deps.test = test

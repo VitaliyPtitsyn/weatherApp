@@ -5,7 +5,6 @@ import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.databinding.BindingAdapter
 import android.support.v4.view.animation.FastOutSlowInInterpolator
-import android.util.Log
 import android.view.View
 import com.ptitsn.presentation.mvvm.tools.ANIMATION_CONST.ANIMATION_ALPHA
 import com.ptitsn.presentation.mvvm.tools.ANIMATION_CONST.ANIMATION_SLID_UP
@@ -23,8 +22,6 @@ object ANIMATION_CONST {
 
 @BindingAdapter("cv_visible", "cv_animated", "cv_animated_mask")
 fun View.changeVisible(show: Boolean, animated: Boolean, mask: Int) {
-    Log.d("!!!!", "changeVisible ${id} $show")
-
     val targetVisibility = if (show) View.VISIBLE else View.GONE
     if (visibility != targetVisibility) {
         if (!animated)

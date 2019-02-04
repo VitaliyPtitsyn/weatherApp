@@ -4,10 +4,7 @@ import android.content.Context
 import android.content.res.Resources
 import com.ptitsn.di.PerApp
 import com.ptitsn.di.WhetherApp
-import com.ptitsn.di.module.AppModule
-import com.ptitsn.di.module.ScreensModule
-import com.ptitsn.di.module.UiMappersModule
-import com.ptitsn.di.module.UseCaseModule
+import com.ptitsn.di.module.*
 import com.ptitsn.di.module.vm.ViewModelModule
 import com.ptitsn.domain.callback.IApplicationListener
 import com.ptitsn.domain.di.AppContext
@@ -24,6 +21,9 @@ import dagger.android.support.AndroidSupportInjectionModule
     ScreensModule::class,
     ViewModelModule::class,
     UiMappersModule::class,
+    DataToolsModule::class,
+    RepositroyModule::class,
+    RemoteModule::class,
     UseCaseModule::class
 ])
 interface AppComponent : AndroidInjector<WhetherApp> {

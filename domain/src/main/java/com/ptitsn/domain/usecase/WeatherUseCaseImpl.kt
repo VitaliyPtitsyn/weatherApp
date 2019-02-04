@@ -1,22 +1,27 @@
 package com.ptitsn.domain.usecase
 
+import com.ptitsn.domain.model.Location
 import com.ptitsn.domain.model.Weather
+import com.ptitsn.domain.repository.LocationRepository
+import com.ptitsn.domain.repository.WhetherRepository
 import io.reactivex.Single
-import java.sql.Date
 import javax.inject.Inject
 
-class WeatherUseCaseImpl @Inject constructor() : WeatherUseCase {
+class WeatherUseCaseImpl @Inject constructor(
+        val weatherRep: WhetherRepository,
+        val lcoationRe: LocationRepository
+) : WeatherUseCase {
 
 
     override fun provideCurrentLocation(): Single<Weather> =
-            Single.just(Weather("city", 34f, Date(5465443)))
+            lcoationRe.provideLocation().flatMap { loc: Location ->
+                weatherRep.provideCurrentLocation(loc)
+            }
 
-    override fun provideWeatherForecastLocation(): Single<List<Weather>> = Single.just(
-            listOf(
-                    Weather("city", 34F, Date(5465443)),
-                    Weather("city", 34F, Date(5465443)),
-                    Weather("city", 34F, Date(5465443)))
-    )
+    override fun provideWeatherForecastLocation(): Single<List<Weather>> =
+            lcoationRe.provideLocation().flatMap { loc: Location ->
+                weatherRep.provideWeatherForecastLocation(loc)
+            }
 
 }
 
