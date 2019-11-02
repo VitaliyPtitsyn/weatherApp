@@ -18,7 +18,7 @@ open class RestClientImplementation @Inject constructor(
 
 
     companion object {
-        const val BASE_URL = "http://api.apixu.com/"
+        const val BASE_URL = "http://api.weatherstack.com/"
         const val TIME_OUT = 25L
     }
 

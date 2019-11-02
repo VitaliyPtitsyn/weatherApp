@@ -15,7 +15,7 @@ class WhetherRepositoryImpl @Inject constructor(val restClient: RestClient,
 
 
     companion object {
-        const val KEY = "7a2aa86b3a3b487aab0150123190202"
+        const val KEY = "63a475647722f14673c0f0c14555a85b"
         const val daysCount = 7
     }
 

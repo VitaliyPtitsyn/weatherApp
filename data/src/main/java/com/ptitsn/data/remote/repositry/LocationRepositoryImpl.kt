@@ -20,7 +20,7 @@ class LocationRepositoryImpl @Inject constructor(
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
             if (location != null)
                 emiter.onSuccess(com.ptitsn.domain.model.Location(lon = location.longitude, lat = location.latitude))
-            emiter.onError(NoAvaibelLocation())
+            else emiter.onError(NoAvaibelLocation())
         }.addOnFailureListener {
             emiter.onError(NoAvaibelLocation())
         }
