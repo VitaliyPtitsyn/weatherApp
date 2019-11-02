@@ -11,7 +11,7 @@ interface WeatherApi {
     /**
      * https://api.apixu.com/v1/current.json?key=7a2aa86b3a3b487aab0150123190202&q=48.8567,2.3508
      */
-    @GET("current.json")
+    @GET("current")
     fun getCurrentWeateher(@Query("key") key: String,
                            @Query("q") latLang: String
     ): Single<RemoteCurrentWeather>
@@ -19,7 +19,7 @@ interface WeatherApi {
     /**
      *https://api.apixu.com/v1/forecast.json?key=7a2aa86b3a3b487aab0150123190202&q=48.8567,2.3508&days=5
      */
-    @GET("forecast.json")
+    @GET("forecast")
     fun getforecast(
             @Query("key") key: String,
             @Query("q") latLang: String,
