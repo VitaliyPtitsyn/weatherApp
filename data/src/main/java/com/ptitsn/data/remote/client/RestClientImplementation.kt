@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 open class RestClientImplementation @Inject constructor(
         @AppContext val context: Context,
-        val dataTools: DataToolsMapper) : RestClient {
+        dataTools: DataToolsMapper) : RestClient {
 
 
     companion object {
@@ -24,10 +24,10 @@ open class RestClientImplementation @Inject constructor(
 
     val gson = dataTools.provideGson()
     var okHttpClient = provideOkHttp()
-    var retrofit: Retrofit = cretaeRetrofit(okHttpClient)
+    var retrofit: Retrofit = createRetrofit(okHttpClient)
 
 
-    fun provideOkHttp(): OkHttpClient {
+    private fun provideOkHttp(): OkHttpClient {
         val builder = OkHttpClient.Builder()
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
@@ -38,7 +38,7 @@ open class RestClientImplementation @Inject constructor(
     }
 
 
-    fun cretaeRetrofit(okHttpClient: OkHttpClient) = Retrofit.Builder()
+    private fun createRetrofit(okHttpClient: OkHttpClient) = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

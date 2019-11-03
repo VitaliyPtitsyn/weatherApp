@@ -1,6 +1,6 @@
 package com.ptitsn.presentation.mvvm.model
 
-data class WeatherUi(val city: CharSequence,
+data class WeatherUi(val region: CharSequence,
                      val celsius: CharSequence,
-                     val celsiusWithLeter: CharSequence,
+                     val celsiusWithLetter: CharSequence,
                      val weekDay: CharSequence)

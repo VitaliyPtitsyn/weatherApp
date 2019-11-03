@@ -57,12 +57,12 @@ class WeatherVMTest {
     @Test
     fun `check Weather`() {
         Mockito.`when`(weatherUseCase.provideCurrentLocation())
-                .thenReturn(Single.just(Weather("city", 34.3, Date(5465443))))
+                .thenReturn(Single.just(Weather("region", 34.3, Date(5465443))))
         Mockito.`when`(weatherUseCase.provideWeatherForecastLocation())
                 .thenReturn(Single.just(listOf(
-                        Weather("city", 34.3, Date(5465443)),
-                        Weather("city", 34.3, Date(5465443)),
-                        Weather("city", 34.3, Date(5465443))
+                        Weather("region", 34.3, Date(5465443)),
+                        Weather("region", 34.3, Date(5465443)),
+                        Weather("region", 34.3, Date(5465443))
                 )))
 
         val currentWeather = classUnderTest.lvCurrentWeather.testObserver()

@@ -15,14 +15,14 @@ class LocationRepositoryImpl @Inject constructor(
 ) : LocationRepository {
 
     @SuppressLint("MissingPermission")
-    override fun provideLocation(): Single<com.ptitsn.domain.model.Location> = Single.create { emiter ->
+    override fun provideLocation(): Single<com.ptitsn.domain.model.Location> = Single.create { emitter ->
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
             if (location != null)
-                emiter.onSuccess(com.ptitsn.domain.model.Location(lon = location.longitude, lat = location.latitude))
-            else emiter.onError(NoAvaibelLocation())
+                emitter.onSuccess(com.ptitsn.domain.model.Location(lon = location.longitude, lat = location.latitude))
+            else emitter.onError(NoAvaibelLocation())
         }.addOnFailureListener {
-            emiter.onError(NoAvaibelLocation())
+            emitter.onError(NoAvaibelLocation())
         }
     }
 

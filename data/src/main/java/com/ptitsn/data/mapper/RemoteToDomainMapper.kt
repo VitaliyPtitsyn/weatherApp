@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 class RemoteToDomainMapper @Inject constructor() {
 
-    private val dateTomeFormatter = SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.ENGLISH);
-    private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+    private val dateTomeFormatter = SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.ENGLISH)
+    private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
 
     @Synchronized
     fun parseDateTime(date: String) = dateTomeFormatter.parse(date)
@@ -24,10 +24,10 @@ class RemoteToDomainMapper @Inject constructor() {
                 parseDateTime(it.weather.lastUpdate))
     }
 
-    fun map(forecust: RemoteForecastWeather): List<Weather> {
-        val name = forecust.location.name;
-        return forecust.forecast.forecastDay.map { wd ->
-            Weather(name, wd.day.avgtemp_c, parseDate(wd.date))
+    fun map(forecast: RemoteForecastWeather): List<Weather> {
+        val name = forecast.location.name
+        return forecast.forecast.forecastDay.map { wd ->
+            Weather(name, wd.day.avgtemp, parseDate(wd.date))
         }
     }
 }

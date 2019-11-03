@@ -14,8 +14,12 @@ class WeatherUseCaseImpl @Inject constructor(
 
 
     override fun provideCurrentLocation(): Single<Weather> =
-            lcoationRe.provideLocation().flatMap { loc: Location ->
-                weatherRep.provideCurrentLocation(loc)
+            lcoationRe
+                    .provideLocation()
+                    .flatMap {
+                        loc: Location ->
+                weatherRep
+                        .provideCurrentLocation(loc)
             }
 
     override fun provideWeatherForecastLocation(): Single<List<Weather>> =

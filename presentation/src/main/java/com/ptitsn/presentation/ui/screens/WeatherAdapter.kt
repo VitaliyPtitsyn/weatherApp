@@ -9,23 +9,23 @@ import com.ptitsn.presentation.R
 import com.ptitsn.presentation.databinding.RhWetherBinding
 import com.ptitsn.presentation.mvvm.model.WeatherUi
 
-class WeatherAdpater : RecyclerView.Adapter<WeatherAdpater.WeatherForecastHolder>() {
+class WeatherAdapter : RecyclerView.Adapter<WeatherAdapter.WeatherForecastHolder>() {
     private val mRegionsList: ArrayList<WeatherUi> = ArrayList()
 
 
     override fun getItemCount(): Int = mRegionsList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherAdpater.WeatherForecastHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherForecastHolder {
         val binding = DataBindingUtil.inflate<RhWetherBinding>(LayoutInflater.from(parent.context),
                 R.layout.rh_wether, parent, false)
         return WeatherForecastHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: WeatherAdpater.WeatherForecastHolder, position: Int) {
-        holder.binding.weather = mRegionsList.get(position)
+    override fun onBindViewHolder(holder: WeatherForecastHolder, position: Int) {
+        holder.binding.weather = mRegionsList[position]
     }
 
-    fun subpmitUpdate(regionsList: List<WeatherUi>?) {
+    fun submitUpdate(regionsList: List<WeatherUi>?) {
         val difCallback = RegionDiffCallback(mRegionsList, regionsList ?: listOf())
         val diffResult = DiffUtil.calculateDiff(difCallback)
         this.mRegionsList.clear()
@@ -35,19 +35,19 @@ class WeatherAdpater : RecyclerView.Adapter<WeatherAdpater.WeatherForecastHolder
 
     class WeatherForecastHolder(val binding: RhWetherBinding) : RecyclerView.ViewHolder(binding.root)
 
-    class RegionDiffCallback constructor(val old: List<WeatherUi>,
+    class RegionDiffCallback constructor(private val old: List<WeatherUi>,
                                          val new: List<WeatherUi>) : DiffUtil.Callback() {
 
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            val old = old.get(oldItemPosition)
-            val new = new.get(newItemPosition)
+            val old = old[oldItemPosition]
+            val new = new[newItemPosition]
             return old == new
         }
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            val old = old.get(oldItemPosition)
-            val new = new.get(newItemPosition)
+            val old = old[oldItemPosition]
+            val new = new[newItemPosition]
             return old.equals(new)
         }
 
@@ -55,7 +55,7 @@ class WeatherAdpater : RecyclerView.Adapter<WeatherAdpater.WeatherForecastHolder
 
         override fun getNewListSize(): Int = new.size
         override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
-            return new.get(newItemPosition)
+            return new[newItemPosition]
         }
     }
 

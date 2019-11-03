@@ -34,7 +34,7 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding>(R.layout.activity_mai
     }
 
     private fun subscribeForWhether() {
-        val adapter = WeatherAdpater()
+        val adapter = WeatherAdapter()
 
         recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.adapter = adapter
@@ -50,7 +50,7 @@ class MainActivity : BaseMvvmActivity<ActivityMainBinding>(R.layout.activity_mai
         recycler.addItemDecoration(dividerItemDecoration)
 
         weatherViewModel.lvWeatherForecast.observe(this, Observer { list ->
-            adapter.subpmitUpdate(list)
+            adapter.submitUpdate(list)
         })
     }
 

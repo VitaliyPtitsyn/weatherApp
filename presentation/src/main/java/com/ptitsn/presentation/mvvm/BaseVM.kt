@@ -2,7 +2,7 @@ package com.ptitsn.presentation.mvvm
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.olearis.presentation.ui.mvvm.event.LiveEvent
+import com.ptitsn.presentation.mvvm.event.LiveEvent
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -10,7 +10,7 @@ abstract class BaseVM : ViewModel() {
 
     protected val compositeDisposable = CompositeDisposable()
 
-    val lvError = MutableLiveData<LiveEvent<Throwable>>()
+    private val lvError = MutableLiveData<LiveEvent<Throwable>>()
 
 
     override fun onCleared() {

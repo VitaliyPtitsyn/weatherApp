@@ -33,7 +33,7 @@ fun View.changeVisible(show: Boolean, animated: Boolean, mask: Int) {
 }
 
 fun showWithAnimation(view: View, show: Boolean, animatedMask: Int) {
-    val animation = generateAnimtaion(view, show, animatedMask)
+    val animation = generateAnimation(view, show, animatedMask)
     if ((INTER_ACELERATION and animatedMask) > 0)
         animation.interpolator = FastOutSlowInInterpolator()
     animation.duration = 600
@@ -56,19 +56,19 @@ fun showWithAnimation(view: View, show: Boolean, animatedMask: Int) {
 }
 
 
-fun generateAnimtaion(view: View, show: Boolean, animatedMask: Int): ObjectAnimator {
-    val animatinList = LinkedList<PropertyValuesHolder>()
+fun generateAnimation(view: View, show: Boolean, animatedMask: Int): ObjectAnimator {
+    val animationList = LinkedList<PropertyValuesHolder>()
     ANIMATION_CONST.animations
             .filter { mask -> (mask and animatedMask) > 0; }
             .forEach { mask ->
                 when (mask) {
-                    ANIMATION_ALPHA -> animatinList.add(
+                    ANIMATION_ALPHA -> animationList.add(
                             if (show) PropertyValuesHolder.ofFloat(View.ALPHA, 0.3f, 1f)
                             else PropertyValuesHolder.ofFloat(View.ALPHA, 1f, 0f))
-                    ANIMATION_SLID_UP -> animatinList.add(
+                    ANIMATION_SLID_UP -> animationList.add(
                             if (show) PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, (view.parent as View).height.toFloat(), 0f)
                             else PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0f, (view.parent as View).height.toFloat()))
                 }
             }
-    return ObjectAnimator.ofPropertyValuesHolder(view, *animatinList.toTypedArray())
+    return ObjectAnimator.ofPropertyValuesHolder(view, *animationList.toTypedArray())
 }

@@ -32,16 +32,16 @@ class Loaded : ScreenState(ScreenStateEnum.LOADED) {
 }
 
 data class ErrorState(val throwable: Throwable,
-                      val meesage: CharSequence? = null,
+                      val message: CharSequence? = null,
                       val retry: () -> Unit) : ScreenState(ScreenStateEnum.ERROR_STATE) {
     override fun equals(other: Any?): Boolean =
             if (other is ErrorState)
-                throwable::class.equals(other.throwable::class)
-            else false;
+                throwable::class == other.throwable::class
+            else false
 
     override fun hashCode(): Int {
         var result = throwable.hashCode()
-        result = 31 * result + (meesage?.hashCode() ?: 0)
+        result = 31 * result + (message?.hashCode() ?: 0)
         result = 31 * result + retry.hashCode()
         return result
     }

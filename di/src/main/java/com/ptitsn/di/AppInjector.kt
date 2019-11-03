@@ -35,7 +35,7 @@ import dagger.android.support.HasSupportFragmentInjector
 object AppInjector {
     fun init(app: WhetherApp): AppComponent {
         val dagerApp = DaggerAppComponent.builder()
-                .applicationContext(app)
+                .applicationContext(app.applicationContext)
                 .applicationResources(app.resources)
                 .build()
 
