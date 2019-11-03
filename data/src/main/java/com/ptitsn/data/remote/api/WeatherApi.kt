@@ -20,12 +20,14 @@ interface WeatherApi {
     /**
      * OLD
      *https://api.apixu.com/v1/forecast.json?key=7a2aa86b3a3b487aab0150123190202&q=48.8567,2.3508&days=5
+     *
+     * forecast requests are not supported for free for now
      */
-    @GET("/forecast")
-    fun getForecast(
-            @Query("access_key") key: String,
-            @Query("query") latLang: String,
-            @Query("days") days: Int
-    ): Single<RemoteForecastWeather>
+//    @GET("/forecast")
+//    fun getForecast(
+//            @Query("access_key") key: String,
+//            @Query("query") latLang: String,
+//            @Query("forecast_days") days: Int
+//    ): Single<RemoteForecastWeather>
 
 }

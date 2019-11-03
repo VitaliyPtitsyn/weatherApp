@@ -59,7 +59,7 @@ open class WeatherVM @Inject constructor(
         weatherUseCase.provideCurrentLocation()
                 .map { weather -> modelUiMapper.mapWeather(weather) }
                 .doOnSubscribe { lvScreenState.postValue(Progress()) }
-                .doAfterSuccess { if (autoRequestForecast) getWeatherForecast() }
+                //.doAfterSuccess { if (autoRequestForecast) getWeatherForecast() }    /** not supported for free plan*/
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ value ->
                     lvScreenState.postValue(Loaded())
@@ -69,15 +69,16 @@ open class WeatherVM @Inject constructor(
                 .addTo(compositeDisposable)
     }
 
-    private fun getWeatherForecast() {
-        weatherUseCase.provideWeatherForecastLocation()
-                .map { it.map { weather -> modelUiMapper.mapWeather(weather) } }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ value ->
-                    lvWeatherForecast.postValue(value)
-                }, { t: Throwable -> postErrorState(t, this::getWeatherForecast) })
-                .addTo(compositeDisposable)
-    }
+    /** not supported for free plan*/
+//    private fun getWeatherForecast() {
+//        weatherUseCase.provideWeatherForecastLocation()
+//                .map { it.map { weather -> modelUiMapper.mapWeather(weather) } }
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({ value ->
+//                    lvWeatherForecast.postValue(value)
+//                }, { t: Throwable -> postErrorState(t, this::getWeatherForecast) })
+//                .addTo(compositeDisposable)
+//    }
 
     fun retry() {
         lvScreenState.value?.let { state ->

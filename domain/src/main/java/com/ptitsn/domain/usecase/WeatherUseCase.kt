@@ -6,5 +6,6 @@ import io.reactivex.Single
 interface WeatherUseCase {
 
     fun provideCurrentLocation(): Single<Weather>
-    fun provideWeatherForecastLocation(): Single<List<Weather>>
+    /** not supported for free plan*/
+   // fun provideWeatherForecastLocation(): Single<List<Weather>>
 }

@@ -6,5 +6,6 @@ import io.reactivex.Single
 
 interface WhetherRepository {
     fun provideCurrentLocation(loc: Location): Single<Weather>
-    fun provideWeatherForecastLocation(loc: Location): Single<List<Weather>>
+    /** not supported for free plan*/
+    //fun provideWeatherForecastLocation(loc: Location): Single<List<Weather>>
 }

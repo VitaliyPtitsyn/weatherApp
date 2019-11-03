@@ -29,11 +29,12 @@ class WhetherRepositoryImpl @Inject constructor(private val restClient: RestClie
                     .observeOn(Schedulers.io())
                     .map { remoteToDomainMapper.map(it) }
 
-    override fun provideWeatherForecastLocation(loc: Location): Single<List<Weather>> =
-            api.getForecast(KEY, mapToRequestFormat(loc), daysCount)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(Schedulers.io())
-                    .map { result -> remoteToDomainMapper.map(result) }
+    /** not supported for free plan*/
+//    override fun provideWeatherForecastLocation(loc: Location): Single<List<Weather>> =
+//            api.getForecast(KEY, mapToRequestFormat(loc), daysCount)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(Schedulers.io())
+//                    .map { result -> remoteToDomainMapper.map(result) }
 
 
     private fun mapToRequestFormat(latLong: Location) = "${latLong.lat},${latLong.lon}"
