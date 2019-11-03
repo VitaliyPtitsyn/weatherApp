@@ -12,9 +12,9 @@ open class UiModelMapper @Inject constructor(val resoruces: Resources) {
 
 
     fun mapWeather(it: Weather): WeatherUi =
-            WeatherUi(city = it.city,
+            WeatherUi(region = it.region,
                     celsius = formateTocelsi(it.celsius),
-                    celsiusWithLeter = formateToCelsWitLater(it.celsius),
+                    celsiusWithLetter = formateToCelsWitLater(it.celsius),
                     weekDay = getWeekDay(it.date))
 
     fun getWeekDay(date: Date): CharSequence {

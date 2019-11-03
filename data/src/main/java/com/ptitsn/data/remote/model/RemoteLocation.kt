@@ -2,7 +2,7 @@ package com.ptitsn.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class RemoteLocaltaion(
+data class RemoteLocation(
         @SerializedName("name") val name: String,
         @SerializedName("country") val country: String,
         @SerializedName("lat") val lat: Double,

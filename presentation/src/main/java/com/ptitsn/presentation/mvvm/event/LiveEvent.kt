@@ -1,4 +1,4 @@
-package com.olearis.presentation.ui.mvvm.event
+package com.ptitsn.presentation.mvvm.event
 
 open class LiveEvent<out T>(private val content: T) {
 

@@ -8,20 +8,23 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class WeatherUseCaseImpl @Inject constructor(
-        val weatherRep: WhetherRepository,
-        val lcoationRe: LocationRepository
+        private val weatherRep: WhetherRepository,
+        private val locationRe: LocationRepository
 ) : WeatherUseCase {
 
 
     override fun provideCurrentLocation(): Single<Weather> =
-            lcoationRe.provideLocation().flatMap { loc: Location ->
-                weatherRep.provideCurrentLocation(loc)
-            }
-
-    override fun provideWeatherForecastLocation(): Single<List<Weather>> =
-            lcoationRe.provideLocation().flatMap { loc: Location ->
-                weatherRep.provideWeatherForecastLocation(loc)
-            }
+            locationRe
+                    .provideLocation()
+                    .flatMap { loc: Location ->
+                        weatherRep
+                                .provideCurrentLocation(loc)
+                    }
+    /** not supported for free plan*/
+//    override fun provideWeatherForecastLocation(): Single<List<Weather>> =
+//            locationRe.provideLocation().flatMap { loc: Location ->
+//                weatherRep.provideWeatherForecastLocation(loc)
+//            }
 
 }
 

@@ -1,5 +1,6 @@
 package com.ptitsn.data.mapper
 
+import android.util.Log
 import com.ptitsn.data.remote.model.RemoteCurrentWeather
 import com.ptitsn.data.remote.model.RemoteForecastWeather
 import com.ptitsn.domain.model.Weather
@@ -9,25 +10,44 @@ import javax.inject.Inject
 
 class RemoteToDomainMapper @Inject constructor() {
 
-    private val dateTomeFormatter = SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.ENGLISH);
-    private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+    private val dateTomeFormatter = SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.ENGLISH)
+    private val dateFormatter = SimpleDateFormat("hh:mm a", Locale.ENGLISH)
 
     @Synchronized
-    fun parseDateTime(date: String) = dateTomeFormatter.parse(date)
+    fun parseDateTime(date: String): Date {
+        return try {
+            Log.d("parse", date)
+            dateTomeFormatter.parse(date)!!
+        } catch (e: Exception) {
+            Log.d("parse", date)
+            Date()
+        }
+    }
 
     @Synchronized
-    fun parseDate(date: String) = dateFormatter.parse(date)
+    fun parseDate(date: String): Date {
+        return try {
+            Log.d("parse", date)
+            dateFormatter.parse(date)!!
+        } catch (e: Exception) {
+            Log.d("parse", date)
+            Date()
+        }
+    }
 
     fun map(it: RemoteCurrentWeather): Weather {
-        return Weather(it.location.name,
+        Log.d("map current", it.toString())
+        return Weather(
+                it.location.name,
                 it.weather.tempC,
                 parseDateTime(it.weather.lastUpdate))
     }
 
-    fun map(forecust: RemoteForecastWeather): List<Weather> {
-        val name = forecust.location.name;
-        return forecust.forecast.forecastDay.map { wd ->
-            Weather(name, wd.day.avgtemp_c, parseDate(wd.date))
+    /** not supported for free plan*/
+    fun map(forecast: RemoteForecastWeather): List<Weather> {
+        val name = forecast.location.name
+        return forecast.forecast.forecastDay.map { wd ->
+            Weather(name, wd.day.avgtemp, parseDate(wd.date))
         }
     }
 }

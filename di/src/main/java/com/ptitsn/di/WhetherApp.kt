@@ -19,7 +19,7 @@ class WhetherApp : DaggerApplication() {
         super.onCreate()
         RxJavaPlugins.setErrorHandler { throwable ->
             Log.e("WhetherApp", "handled rx exception ${throwable::class.java.simpleName} " +
-                    "\n\tmessage: \t${throwable.message}", throwable)
+                    "message: ${throwable.message}", throwable)
         }
 
     }

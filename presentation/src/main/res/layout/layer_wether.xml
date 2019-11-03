@@ -41,7 +41,7 @@
 
 				style = "@style/AppTheme.text.subtitle"
 				android:layout_marginTop = "@dimen/padding_normal"
-				android:text = "@{vm.lvCurrentWeather.city}"
+				android:text = "@{vm.lvCurrentWeather.region}"
 				app:layout_constraintEnd_toEndOf = "@+id/guidelineEnd"
 				app:layout_constraintStart_toStartOf = "@+id/guidelineStart"
 				app:layout_constraintTop_toBottomOf = "@+id/txt_cels"

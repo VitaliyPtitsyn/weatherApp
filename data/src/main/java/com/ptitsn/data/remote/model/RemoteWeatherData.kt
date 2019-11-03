@@ -3,6 +3,6 @@ package com.ptitsn.data.remote.model
 import com.google.gson.annotations.SerializedName
 
 data class RemoteWeatherData(
-        @SerializedName("last_updated") val lastUpdate: String,
-        @SerializedName("temp_c") val tempC: Double
+        @SerializedName("observation_time") val lastUpdate: String,
+        @SerializedName("temperature") val tempC: Double
 )
